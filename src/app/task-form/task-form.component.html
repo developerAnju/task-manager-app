@@ -1,0 +1,32 @@
+<div class="container my-5">
+    <div class="col col-lg-8">
+        <h1 class="mb-4 text-center">Task Form</h1>
+        <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+            <div class="mb-4">
+                <label for="name">Task Name</label>
+                <input type="text" id="name" class="form-control" formControlName="name">
+                <div *ngIf="(submitted || taskForm.get('name')?.touched) && taskForm.get('name')?.invalid">
+                    <small *ngIf="taskForm.get('name')?.errors?.['required']" class="text-danger">Task name is required</small>
+                    <small *ngIf="taskForm.get('name')?.errors?.['minLength']" class="text-danger">Minimum 3 characters required</small>
+                </div>
+            </div>
+            <div class="mb-4">
+                <label for="description">Description</label>
+                <textarea name="" id="description" class="form-control" formControlName="description"></textarea>
+                <div *ngIf="(submitted || taskForm.get('description')?.touched) && taskForm.get('description')?.invalid">
+                    <small *ngIf="taskForm.get('description')?.errors?.['required']" class="text-danger">Description is required</small>
+                    <small *ngIf="taskForm.get('description')?.errors?.['maxLength']" class="text-danger">Maximum 255 characters are required</small>
+                </div>
+            </div>
+            <div class="mb-4">
+                <label for="deadline">Deadline</label>
+                <input type="date" id="deadline" class="form-control" formControlName="deadline">
+                <div *ngIf="(submitted || taskForm.get('deadline')?.touched) && taskForm.get('deadline')?.invalid">
+                    <small *ngIf="taskForm.get('deadline')?.errors?.['required']" class="text-danger">Deadline is required</small>
+                </div>
+            </div>
+            <!-- [disabled]="taskForm.invalid" -->
+            <button type="submit" class="btn btn-success">Add Task</button>
+        </form>
+    </div>
+</div>
